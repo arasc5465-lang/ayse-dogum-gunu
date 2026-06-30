@@ -1,0 +1,195 @@
+/* GENEL AYARLAR VE TEMİZLİK */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #FFF0F5; /* Açık Pembe/Beyaz Arka Plan */
+}
+
+/* EKRAN KATMANLARI */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+/* 1. EKRAN: GİRİŞ */
+#welcome-screen {
+    background: linear-gradient(135deg, #ffb6c1 0%, #ffffff 100%);
+}
+
+.welcome-box {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+}
+
+.welcome-box h1 {
+    color: #ff69b4;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+#start-btn {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s;
+}
+
+#start-btn:hover {
+    transform: scale(1.05);
+}
+
+/* 2. EKRAN: DOĞUM GÜNÜ ALANI */
+#birthday-screen {
+    background: linear-gradient(135deg, #ffffff 0%, #ffc0cb 100%);
+    justify-content: space-around;
+    padding: 20px 0;
+}
+
+.birthday-title {
+    color: #ff1493;
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    text-align: center;
+    animation: bounce 2s infinite;
+}
+
+/* PASTA TASARIMI VE ANİMASYONU */
+.cake-container {
+    position: relative;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.cake {
+    position: relative;
+    width: 180px;
+    animation: floatUp 1s ease-out forwards;
+}
+
+/* Katmanlar */
+.bottom-layer, .middle-layer, .top-layer {
+    background: #ffb6c1;
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto;
+    border: 4px solid #fff;
+}
+
+.bottom-layer { width: 180px; height: 60px; background: #ff69b4; }
+.middle-layer { width: 140px; height: 50px; background: #ff85c2; }
+.top-layer { width: 100px; height: 40px; background: #ffa3d1; }
+
+/* Mum ve Alev */
+.candle {
+    position: absolute;
+    width: 8px;
+    height: 40px;
+    background: linear-gradient(to right, #ffffff, #ff1493);
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.flame {
+    position: absolute;
+    width: 16px;
+    height: 24px;
+    background: #ffaa00;
+    border-radius: 50% 50% 20% 20%;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px #ffaa00, 0 0 20px #ff5500;
+    transform-origin: bottom center;
+    animation: flicker 0.3s ease-in-out infinite alternate;
+    transition: all 0.2s ease;
+}
+
+/* ÜFLEME ALANI */
+.control-area {
+    text-align: center;
+}
+
+#blow-btn {
+    background-color: #ffffff;
+    color: #ff69b4;
+    border: 3px solid #ff69b4;
+    width: 90px;
+    height: 90px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    outline: none;
+    user-select: none; /* Metin seçilmeyi engeller */
+    -webkit-user-select: none;
+}
+
+#blow-btn:active {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(0.95);
+}
+
+.instruction {
+    margin-top: 10px;
+    color: #ff1493;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* EKRAN GEÇİŞ ANİMASYONLARI */
+.fade-out { opacity: 0; transform: scale(0.9); }
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(2deg); opacity: 0.9; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

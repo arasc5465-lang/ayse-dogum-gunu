@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyiki Doğdun Ayşe!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- İLK EKRAN: GİRİŞ BUTONU -->
+    <div id="welcome-screen" class="screen">
+        <div class="welcome-box">
+            <h1>Ayşe için Bir Sürpriz Var! 💕</h1>
+            <button id="start-btn">Tıkla ve Gör</button>
+        </div>
+    </div>
+
+    <!-- İKİNCİ EKRAN: DOĞUM GÜNÜ ALANI -->
+    <div id="birthday-screen" class="screen hidden">
+        <h1 class="birthday-title">🎉 İYİKİ DOĞDUN AYŞE 🎉</h1>
+        
+        <!-- PASTA ANİMASYONU -->
+        <div class="cake-container">
+            <div class="cake">
+                <div class="candle">
+                    <div id="flame" class="flame"></div>
+                </div>
+                <div class="top-layer"></div>
+                <div class="middle-layer"></div>
+                <div class="bottom-layer"></div>
+            </div>
+        </div>
+
+        <!-- ÜFLEME BUTONU -->
+        <div class="control-area">
+            <button id="blow-btn">💨 ÜFLE</button>
+            <p class="instruction">Üflemek için basılı tut</p>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const birthdayScreen = document.getElementById('birthday-screen');
+        const blowBtn = document.getElementById('blow-btn');
+        const flame = document.getElementById('flame');
+
+        // Giriş butonuna basınca ekran değişimi ve pasta animasyonu tetikleme
+        startBtn.addEventListener('click', () => {
+            welcomeScreen.classList.add('fade-out');
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                birthdayScreen.classList.remove('hidden');
+                birthdayScreen.classList.add('fade-in');
+            }, 500);
+        });
+
+        // Üfleme Butonu Mantığı: Basılı tutunca mum söner, çekince veya normalde yanar
+        function sön() {
+            flame.style.opacity = '0';
+            flame.style.transform = 'scale(0) translateX(-50%)';
+        }
+
+        function yan() {
+            flame.style.opacity = '1';
+            flame.style.transform = 'scale(1) translateX(-50%)';
+        }
+
+        // Bilgisayar için fare etkinlikleri
+        blowBtn.addEventListener('mousedown', sön);
+        blowBtn.addEventListener('mouseup', yan);
+        blowBtn.addEventListener('mouseleave', yan);
+
+        // Telefon ve tabletler için dokunma etkinlikleri
+        blowBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            sön();
+        });
+        blowBtn.addEventListener('touchend', yan);
+    </script>
+</body>
+</html>
